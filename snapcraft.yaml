@@ -7,19 +7,12 @@ description: |
 parts:
   ffmpeg:
     build-packages:
-    - autoconf
-    - automake
-    - build-essential
-    - cmake
-    - g++
-    - git
     - libass-dev
     - libfreetype6-dev
     - libmp3lame-dev
     - libopus-dev
     - libsdl1.2-dev
     - libtheora-dev
-    - libtool
     - libva-dev
     - libvdpau-dev
     - libvorbis-dev
@@ -29,7 +22,6 @@ parts:
     - libxcb1-dev
     - libxcb-shm0-dev
     - libxcb-xfixes0-dev
-    - make
     - pkg-config
     - texinfo
     - yasm
