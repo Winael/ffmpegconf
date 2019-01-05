@@ -42,4 +42,4 @@ parts:
     - --enable-nonfree
     source: git://source.ffmpeg.org/ffmpeg.git
     source-type: git
-    
+    source-depth: 1
