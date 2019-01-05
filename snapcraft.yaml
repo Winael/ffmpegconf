@@ -6,9 +6,48 @@ description: |
 
 parts:
   ffmpeg:
-    build-packages: [git, g++, make, yasm, autoconf, libtool, cmake, pkg-config, automake, build-essential, libass-dev, libfreetype6-dev, libsdl1.2-dev, libtheora-dev, libva-dev, libvdpau-dev, libvorbis-dev, libxcb1-dev, libxcb-shm0-dev, libxcb-xfixes0-dev, texinfo, zlib1g-dev, libx264-dev, libmp3lame-dev, libopus-dev, libx265-dev, libvpx-dev]
+    build-packages:
+    - autoconf
+    - automake
+    - build-essential
+    - cmake
+    - g++
+    - git
+    - libass-dev
+    - libfreetype6-dev
+    - libmp3lame-dev
+    - libopus-dev
+    - libsdl1.2-dev
+    - libtheora-dev
+    - libtool
+    - libva-dev
+    - libvdpau-dev
+    - libvorbis-dev
+    - libvpx-dev
+    - libx264-dev
+    - libx265-dev
+    - libxcb1-dev
+    - libxcb-shm0-dev
+    - libxcb-xfixes0-dev
+    - make
+    - pkg-config
+    - texinfo
+    - yasm
+    - zlib1g-dev
     plugin: autotools
-    configflags: [--prefix=/usr, --enable-gpl, --enable-libass, --enable-libfreetype, --enable-libmp3lame, --enable-libopus, --enable-libtheora, --enable-libvorbis, --enable-libvpx, --enable-libx264, --enable-libx265, --enable-nonfree]
+    configflags:
+    - --prefix=/usr
+    - --enable-gpl
+    - --enable-libass
+    - --enable-libfreetype
+    - --enable-libmp3lame
+    - --enable-libopus
+    - --enable-libtheora
+    - --enable-libvorbis
+    - --enable-libvpx
+    - --enable-libx264
+    - --enable-libx265
+    - --enable-nonfree
     source: git://source.ffmpeg.org/ffmpeg.git
     source-type: git
     
