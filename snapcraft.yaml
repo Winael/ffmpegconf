@@ -42,6 +42,7 @@ parts:
     - --enable-nonfree
     source: git://source.ffmpeg.org/ffmpeg.git
     source-type: git
+    source-branch: release/3.4
     source-depth: 1
     stage-packages:
     - libasound2
