@@ -40,9 +40,9 @@ parts:
     - libvdpau-dev
     - libvorbis-dev
     - libvpx-dev
-    - libxcb1-dev
     - libxcb-shm0-dev
     - libxcb-xfixes0-dev
+    - libxcb1-dev
     - pkg-config
     - texinfo
     - yasm
