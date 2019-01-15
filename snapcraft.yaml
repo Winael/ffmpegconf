@@ -62,8 +62,12 @@ parts:
     - zlib1g-dev
 
     ### GPL dependencies
+    #- frei0r-plugins-dev
+    #- libcdio-paranoia-dev
+    #- librubberband-dev
     #- libx264-dev
     #- libx265-dev
+    #- libxvidcore-dev
 
     ### non-free dependencies
     #- libfdk-aac-dev
@@ -217,8 +221,15 @@ parts:
     - libxfixes3
 
     ### GPL dependencies
+    #- libcdio-cdda1
+    #- libcdio-paranoia1
+    #- libcdio13
+    #- libfftw3-double3
+    #- librubberband2v5
+    #- libsamplerate0
     #- libx264-148
     #- libx265-79
+    #- libxvidcore4
 
     ### non-free dependencies
     #- libfdk-aac0
