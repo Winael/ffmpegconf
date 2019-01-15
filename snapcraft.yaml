@@ -39,7 +39,11 @@ parts:
   ffmpeg:
     build-packages:
     ### Dynamic-linking safe dependencies
+    - ladspa-sdk
     - libass-dev
+    - libbluray-dev
+    - libbs2b-dev
+    - libcaca-dev
     - libfreetype6-dev
     - libgmp-dev
     - libmp3lame-dev
@@ -164,8 +168,20 @@ parts:
 
     ### The following flags are free from copyright compliance concerns
     ### **if dynamically linked**
+    # enable LADSPA audio filtering
+    - --enable-ladspa
+
     # enable libass subtitles rendering, needed for subtitles and ass filter
     - --enable-libass
+
+    # enable BluRay reading using libbluray
+    - --enable-libbluray
+
+    # enable bs2b DSP library
+    - --enable-libbs2b
+
+    # enable textual display using libcaca
+    - --enable-libcaca
 
     # enable libfreetype, needed for drawtext filter
     - --enable-libfreetype
@@ -193,6 +209,9 @@ parts:
     ### Dynamic-linking safe dependencies
     - libasound2
     - libass5
+    - libbluray1
+    - libbs2b0
+    - libcaca0
     - libdrm2
     - libfontconfig1
     - libfribidi0
