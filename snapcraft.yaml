@@ -32,13 +32,17 @@ parts:
     ### Dynamic-linking safe dependencies
     - libass-dev
     - libfreetype6-dev
+    - libgmp-dev
     - libmp3lame-dev
+    - libopencore-amrnb-dev
+    - libopencore-amrwb-dev
     - libopus-dev
     - libsdl1.2-dev
     - libtheora-dev
     - libva-dev
     - libvdpau-dev
     - libvorbis-dev
+    - libvo-amrwbenc-dev
     - libvpx-dev
     - libxcb-shm0-dev
     - libxcb-xfixes0-dev
@@ -67,18 +71,21 @@ parts:
     - --enable-version3
 
     # enable gmp, needed for rtmp(t)e support if openssl or librtmp is not used
-    #- --enable-gmp
+    # FIXME: Not enabled in Debian...?
+    - --enable-gmp
 
     # enable AMR-NB de/encoding via libopencore-amrnb
-    #- --enable-libopencore-amrnb
+    - --enable-libopencore-amrnb
 
     # enable AMR-WB decoding via libopencore-amrwb
-    #- --enable-libopencore-amrwb
+    - --enable-libopencore-amrwb
 
     # enable AMR-WB encoding via libvo-amrwbenc
-    #- --enable-libvo-amrwbenc
+    - --enable-libvo-amrwbenc
 
     # enable Rockchip Media Process Platform code
+    # http://opensource.rock-chips.com/wiki_Mpp
+    # DISABLED: Unknown use cases, unknown licensing model
     #- --enable-rkmpp
 
     ### The following flags allow linking to GPL code
@@ -170,17 +177,21 @@ parts:
     - libdrm2
     - libfontconfig1
     - libfribidi0
+    - libgmp10
     - libgraphite2-3
     - libharfbuzz0b
     - libmp3lame0
     - libnuma1
     - libogg0
+    - libopencore-amrnb0
+    - libopencore-amrwb0
     - libopus0
     - libtheora0
     - libva-drm1
     - libva-x11-1
     - libva1
     - libvdpau1
+    - libvo-amrwbenc0
     - libvorbis0a
     - libvorbisenc2
     - libvpx3
