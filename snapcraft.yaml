@@ -69,6 +69,9 @@ parts:
     #- libx265-dev
     #- libxvidcore-dev
 
+    ### GPLv3 dependencies
+    #- libsmbclient-dev
+
     ### non-free dependencies
     #- libfdk-aac-dev
 
@@ -230,6 +233,9 @@ parts:
     #- libx264-148
     #- libx265-79
     #- libxvidcore4
+
+    ### GPLv3 dependencies
+    #- libsmbclient
 
     ### non-free dependencies
     #- libfdk-aac0
