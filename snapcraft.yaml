@@ -27,6 +27,15 @@ parts:
   #     - EXTERNAL_LIBRARY_VERSION3_LIST=
   #     - EXTERNAL_LIBRARY_GPLV3_LIST=
   # * The output of the `./parts/ffmpeg/src/configure --help` command
+  #
+  # Additional LEGAL notes:
+  # 
+  # * apache-v2
+  #   Only compatible with (L)GPLv3 and will make the (statically) linked product (L)GPLv3 if enabled
+  #     - Apache License v2.0 and GPL Compatibility
+  #       https://www.apache.org/licenses/GPL-compatibility.html
+  #     - Various Licenses and Comments about Them - GNU Project - Free Software Foundation
+  #       https://www.gnu.org/licenses/license-list.html#apache2
   ffmpeg:
     build-packages:
     ### Dynamic-linking safe dependencies
@@ -66,8 +75,8 @@ parts:
     - --enable-shared
     #- --disable-shared
 
-    ### The following flags allow linking to LGPLv3 code
-    ### **The linked product will become LGPLv3 if statically linked**
+    ### The following flags allow linking to (L)GPLv3-compatible code
+    ### **The linked product will become (L)GPLv3 if (statically) linked**
     - --enable-version3
 
     # enable gmp, needed for rtmp(t)e support if openssl or librtmp is not used
@@ -75,12 +84,15 @@ parts:
     - --enable-gmp
 
     # enable AMR-NB de/encoding via libopencore-amrnb
+    # LEGAL: #apache-v2
     - --enable-libopencore-amrnb
 
     # enable AMR-WB decoding via libopencore-amrwb
+    # LEGAL: #apache-v2
     - --enable-libopencore-amrwb
 
     # enable AMR-WB encoding via libvo-amrwbenc
+    # LEGAL: #apache-v2
     - --enable-libvo-amrwbenc
 
     # enable Rockchip Media Process Platform code
