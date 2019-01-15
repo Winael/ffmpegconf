@@ -65,6 +65,9 @@ parts:
     #- libx264-dev
     #- libx265-dev
 
+    ### non-free dependencies
+    #- libfdk-aac-dev
+
     plugin: autotools
     configflags:
     - --prefix=/usr
@@ -112,9 +115,6 @@ parts:
 
     # enable frei0r video filtering
     #- --enable-frei0r
-
-    # enable AAC de/encoding via libfdk-aac
-    #- --enable-libfdk-aac
 
     # enable rubberband needed for rubberband filter
     #- --enable-librubberband
@@ -219,3 +219,6 @@ parts:
     ### GPL dependencies
     #- libx264-148
     #- libx265-79
+
+    ### non-free dependencies
+    #- libfdk-aac0
