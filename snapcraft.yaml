@@ -168,6 +168,11 @@ parts:
 
     ### The following flags are free from copyright compliance concerns
     ### **if dynamically linked**
+    # enable libavresample build
+    # FIXME: Also `--disable-filter`ed in Debian packaging, why?
+    - --enable-avresample
+    - --disable-filter=resample
+
     # enable LADSPA audio filtering
     - --enable-ladspa
 
