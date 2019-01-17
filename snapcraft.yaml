@@ -5,68 +5,242 @@ description: |
   This sets up ffmpeg for projects.
 
 parts:
+  # By default some FFmpeg features are disabled due to the potential
+  # risk of making the consuming snap's publisher be legally-required to
+  # fulfill certain components' copyright/copyleft/nonfree requirements.
+  # 
+  # If you want certain features to be enabled and is certain that you
+  # are legally qualified to use them you may override the corresponding
+  # keys with the uncommented values.
+  #
+  # This default does NOT cover patent issues, refer the Patent Mini-FAQ
+  # section of the FFmpeg License and Legal Considerations page in the
+  # reference for more info.
+  # 
+  # Reference:
+  # 
+  # * FFmpeg License and Legal Considerations
+  #   https://ffmpeg.org/legal.html
+  # * Search the following keywords in the configure script:
+  #     - EXTERNAL_LIBRARY_GPL_LIST=
+  #     - EXTERNAL_LIBRARY_NONFREE_LIST=
+  #     - EXTERNAL_LIBRARY_VERSION3_LIST=
+  #     - EXTERNAL_LIBRARY_GPLV3_LIST=
+  # * The output of the `./parts/ffmpeg/src/configure --help` command
+  #
+  # Additional LEGAL notes:
+  # 
+  # * apache-v2
+  #   Only compatible with (L)GPLv3 and will make the (statically) linked product (L)GPLv3 if enabled
+  #     - Apache License v2.0 and GPL Compatibility
+  #       https://www.apache.org/licenses/GPL-compatibility.html
+  #     - Various Licenses and Comments about Them - GNU Project - Free Software Foundation
+  #       https://www.gnu.org/licenses/license-list.html#apache2
   ffmpeg:
     build-packages:
+    ### Dynamic-linking safe dependencies
+    - ladspa-sdk
     - libass-dev
+    - libbluray-dev
+    - libbs2b-dev
+    - libcaca-dev
     - libfreetype6-dev
+    - libgmp-dev
     - libmp3lame-dev
+    - libopencore-amrnb-dev
+    - libopencore-amrwb-dev
     - libopus-dev
     - libsdl1.2-dev
     - libtheora-dev
     - libva-dev
     - libvdpau-dev
     - libvorbis-dev
+    - libvo-amrwbenc-dev
     - libvpx-dev
-    - libx264-dev
-    - libx265-dev
-    - libxcb1-dev
     - libxcb-shm0-dev
     - libxcb-xfixes0-dev
+    - libxcb1-dev
     - pkg-config
     - texinfo
     - yasm
     - zlib1g-dev
+
+    ### GPL dependencies
+    #- frei0r-plugins-dev
+    #- libcdio-paranoia-dev
+    #- librubberband-dev
+    #- libx264-dev
+    #- libx265-dev
+    #- libxvidcore-dev
+
+    ### GPLv3 dependencies
+    #- libsmbclient-dev
+
+    ### non-free dependencies
+    #- libfdk-aac-dev
+
     plugin: autotools
     configflags:
     - --prefix=/usr
-    - --enable-gpl
+
+    ### Comment out the `--disable-static` flag to allow static-linking to LGPL code
+    ### **The linked product will become LGPL if statically linked**
+    - --disable-static
+    - --enable-shared
+    #- --disable-shared
+
+    ### The following flags allow linking to (L)GPLv3-compatible code
+    ### **The linked product will become (L)GPLv3 if (statically) linked**
+    - --enable-version3
+
+    # enable gmp, needed for rtmp(t)e support if openssl or librtmp is not used
+    # FIXME: Not enabled in Debian...?
+    - --enable-gmp
+
+    # enable AMR-NB de/encoding via libopencore-amrnb
+    # LEGAL: #apache-v2
+    - --enable-libopencore-amrnb
+
+    # enable AMR-WB decoding via libopencore-amrwb
+    # LEGAL: #apache-v2
+    - --enable-libopencore-amrwb
+
+    # enable AMR-WB encoding via libvo-amrwbenc
+    # LEGAL: #apache-v2
+    - --enable-libvo-amrwbenc
+
+    # enable Rockchip Media Process Platform code
+    # http://opensource.rock-chips.com/wiki_Mpp
+    # DISABLED: Unknown use cases, unknown licensing model
+    #- --enable-rkmpp
+
+    ### The following flags allow linking to GPL code
+    ### **The linked product will become GPL**
+    #- --enable-gpl
+
+    # enable reading of AviSynth script files
+    #- --enable-avisynth
+
+    # enable audio CD grabbing with libcdio
+    #- --enable-libcdio
+
+    # enable frei0r video filtering
+    #- --enable-frei0r
+
+    # enable rubberband needed for rubberband filter
+    #- --enable-librubberband
+
+    # enable video stabilization using vid.stab
+    # FIXME: Dependency not available in Ubuntu 16.04
+    #- --enable-libvidstab
+
+    # enable H.264 encoding via x264
+    #- --enable-libx264
+
+    # enable HEVC encoding via x265
+    #- --enable-libx265
+
+    # enable AVS encoding via xavs
+    # FIXME: Dependency not available in Ubuntu 16.04
+    #- --enable-libxavs
+
+    # enable Xvid encoding via xvidcore, native MPEG-4/Xvid encoder exists
+    #- --enable-libxvid
+
+    ### Allow linking to GPLv3 code
+    ### **The linked product will become GPLv3**
+    # Samba protocol support
+    #- --enable-libsmbclient
+
+    ### The following flags allow linking to non-free code
+    ### **The resulting snap will not be redistributable**
+    #- --enable-nonfree
+
+    # enable Blackmagic DeckLink I/O support
+    #- --enable-decklink
+
+    # enable Newteck NDI I/O support
+    #- --enable-libndi_newtek
+
+    # enable AAC de/encoding via libfdk-aac
+    #- --enable-libfdk-aac
+
+    # enable openssl, needed for https support if gnutls is not used
+    # --enable-openssl
+
+    ### The following flags are free from copyright compliance concerns
+    ### **if dynamically linked**
+    # enable libavresample build
+    # FIXME: Also `--disable-filter`ed in Debian packaging, why?
+    - --enable-avresample
+    - --disable-filter=resample
+
+    # enable LADSPA audio filtering
+    - --enable-ladspa
+
+    # enable libass subtitles rendering, needed for subtitles and ass filter
     - --enable-libass
+
+    # enable BluRay reading using libbluray
+    - --enable-libbluray
+
+    # enable bs2b DSP library
+    - --enable-libbs2b
+
+    # enable textual display using libcaca
+    - --enable-libcaca
+
+    # enable libfreetype, needed for drawtext filter
     - --enable-libfreetype
+
+    # enable MP3 encoding via libmp3lame
     - --enable-libmp3lame
+
+    # enable Opus de/encoding via libopus
     - --enable-libopus
+
+    # enable Theora encoding via libtheora
     - --enable-libtheora
+
+    # enable Vorbis en/decoding via libvorbis, native implementation exists
     - --enable-libvorbis
+
+    # enable VP8 and VP9 de/encoding via libvpx
     - --enable-libvpx
-    - --enable-libx264
-    - --enable-libx265
-    - --enable-nonfree
+
     source: git://source.ffmpeg.org/ffmpeg.git
     source-type: git
     source-branch: release/3.4
     source-depth: 1
     stage-packages:
+    ### Dynamic-linking safe dependencies
     - libasound2
     - libass5
+    - libbluray1
+    - libbs2b0
+    - libcaca0
     - libdrm2
     - libfontconfig1
     - libfribidi0
+    - libgmp10
     - libgraphite2-3
     - libharfbuzz0b
     - libmp3lame0
     - libnuma1
     - libogg0
+    - libopencore-amrnb0
+    - libopencore-amrwb0
     - libopus0
     - libtheora0
     - libva-drm1
     - libva-x11-1
     - libva1
     - libvdpau1
+    - libvo-amrwbenc0
     - libvorbis0a
     - libvorbisenc2
     - libvpx3
     - libx11-6
-    - libx264-148
-    - libx265-79
     - libxau6
     - libxcb-shape0
     - libxcb-shm0
@@ -74,3 +248,20 @@ parts:
     - libxdmcp6
     - libxext6
     - libxfixes3
+
+    ### GPL dependencies
+    #- libcdio-cdda1
+    #- libcdio-paranoia1
+    #- libcdio13
+    #- libfftw3-double3
+    #- librubberband2v5
+    #- libsamplerate0
+    #- libx264-148
+    #- libx265-79
+    #- libxvidcore4
+
+    ### GPLv3 dependencies
+    #- libsmbclient
+
+    ### non-free dependencies
+    #- libfdk-aac0
