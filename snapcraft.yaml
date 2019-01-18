@@ -116,3 +116,14 @@ parts:
       - usr/share/man/*
       - usr/share/X11/*
 
+    stage:
+    - $docs-copyright
+    - $library-headers
+    - $library-pkgconfig
+    - $library-shared
+    - $library-static
+
+    prime:
+    - $docs-copyright
+    - $library-shared
+
