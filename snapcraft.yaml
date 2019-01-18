@@ -74,3 +74,45 @@ parts:
     - libxdmcp6
     - libxext6
     - libxfixes3
+
+    filesets:
+      docs:
+      - share/doc
+
+      docs-copyright:
+      - usr/share/doc/*/copyright
+
+      docs-examples:
+      - share/ffmpeg/examples/*
+
+      docs-manpages:
+      - share/man/*
+
+      executables:
+      - bin/*
+      - usr/bin/*
+
+      library-headers:
+      - include/*
+
+      library-pkgconfig:
+      - lib/pkgconfig/*
+
+      library-shared:
+      - lib/**/*.so*
+      - usr/lib/**/*.so*
+
+      library-static:
+      - lib/**/*.a
+      - usr/lib/**/*.a
+
+      misc:
+      - etc/*
+      - usr/share/alsa/*
+      - usr/share/bug/*
+      - usr/share/fonts/*
+      - usr/share/libdrm/*
+      - usr/share/lintian/*
+      - usr/share/man/*
+      - usr/share/X11/*
+
