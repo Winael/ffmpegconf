@@ -28,7 +28,7 @@ parts:
     - zlib1g-dev
     plugin: autotools
     configflags:
-    - --prefix=/usr
+    - --prefix=/
     - --enable-gpl
     - --enable-libass
     - --enable-libfreetype
@@ -74,3 +74,56 @@ parts:
     - libxdmcp6
     - libxext6
     - libxfixes3
+
+    filesets:
+      docs:
+      - share/doc
+
+      docs-copyright:
+      - usr/share/doc/*/copyright
+
+      docs-examples:
+      - share/ffmpeg/examples/*
+
+      docs-manpages:
+      - share/man/*
+
+      executables:
+      - bin/*
+      - usr/bin/*
+
+      library-headers:
+      - include/*
+
+      library-pkgconfig:
+      - lib/pkgconfig/*
+
+      library-shared:
+      - lib/**/*.so*
+      - usr/lib/**/*.so*
+
+      library-static:
+      - lib/**/*.a
+      - usr/lib/**/*.a
+
+      misc:
+      - etc/*
+      - usr/share/alsa/*
+      - usr/share/bug/*
+      - usr/share/fonts/*
+      - usr/share/libdrm/*
+      - usr/share/lintian/*
+      - usr/share/man/*
+      - usr/share/X11/*
+
+    stage:
+    - $docs-copyright
+    - $library-headers
+    - $library-pkgconfig
+    - $library-shared
+    - $library-static
+
+    prime:
+    - $docs-copyright
+    - $library-shared
+
