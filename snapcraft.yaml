@@ -28,7 +28,7 @@ parts:
     - zlib1g-dev
     plugin: autotools
     configflags:
-    - --prefix=/usr
+    - --prefix=/
     - --enable-gpl
     - --enable-libass
     - --enable-libfreetype
