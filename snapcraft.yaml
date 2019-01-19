@@ -45,6 +45,7 @@ parts:
     source-branch: release/3.4
     source-depth: 1
     stage-packages:
+    - try [libnuma1]
     - libasound2
     - libass5
     - libdrm2
@@ -53,7 +54,6 @@ parts:
     - libgraphite2-3
     - libharfbuzz0b
     - libmp3lame0
-    - libnuma1
     - libogg0
     - libopus0
     - libtheora0
